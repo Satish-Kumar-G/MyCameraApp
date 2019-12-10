@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,10 +24,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -87,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.sync_now) {
             if (isNetworkConnected()) {
+                uploadImages();
                 Snackbar.make(cameraOpenButton, "Internet Access", Snackbar.LENGTH_SHORT).show();
             } else {
                 Snackbar.make(cameraOpenButton, "No Internet Access", Snackbar.LENGTH_SHORT).show();
@@ -96,24 +102,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadImages() {
-  /*  Uri file = Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-            ));
-    StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-    uploadTask = riversRef.putFile(file);
+        Snackbar.make(cameraOpenButton,"Uploading...",Snackbar.LENGTH_SHORT).show();
+        for (int i = 0; i < f.size(); i++) {
+            final ProgressDialog progressDialog=new ProgressDialog(this);
+            progressDialog.setTitle("Uploading");
+            Uri file = Uri.fromFile(new File(f.get(i)));
+            StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
+            UploadTask uploadTask = riversRef.putFile(file);
+// Register observers to listen for when the download is done or if it fails
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                    // ...
+                    progressDialog.dismiss();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                   int progress= (int) (taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                   progressDialog.setMessage(""+progress+"%");
+                   progressDialog.setProgress(progress);
+                }
+            });
+        }
 
-    // Register observers to listen for when the download is done or if it fails
-    uploadTask.addOnFailureListener(new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception exception) {
-            // Handle unsuccessful uploads
-        }
-    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-        @Override
-        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-            // ...
-        }
-    });*/
 
     }
 
