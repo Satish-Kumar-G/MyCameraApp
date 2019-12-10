@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "786581318341",
+    "firebase_url": "https://mycampp.firebaseio.com",
+    "project_id": "mycampp",
+    "storage_bucket": "mycampp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786581318341:android:a95a19865053b339e31eac",
+        "android_client_info": {
+          "package_name": "www.androwheels.com.satishkumar.mycameraapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786581318341-ntu8h4eilh0pnl5454bbtjrke910qrmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmSBUUkan7NB-K9YPXGltbQuARa5edDzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786581318341-ntu8h4eilh0pnl5454bbtjrke910qrmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

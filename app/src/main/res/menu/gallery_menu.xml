@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:title="Sync"
+    android:id="@+id/sync_now"
+    android:icon="@drawable/ic_sync_black_24dp"
+    app:showAsAction="ifRoom"
+    android:orderInCategory="1"/>
+</menu>

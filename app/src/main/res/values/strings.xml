@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyCameraApp</string>
+    <string name="capture_desc">This button is used to Capture the Image</string>
+</resources>
